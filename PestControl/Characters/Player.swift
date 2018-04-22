@@ -16,6 +16,8 @@ enum PlayerSettings {
 
 class Player: SKSpriteNode {
     
+    // Player needs to conform to Animatable
+    var animations: [SKAction] = []
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("Use init()")
@@ -33,6 +35,7 @@ class Player: SKSpriteNode {
         physicsBody?.linearDamping = 0.5
         physicsBody?.friction = 0
         physicsBody?.allowsRotation = false
+        createAnimations(character: "player")
     }
     
     func move(target: CGPoint) {
@@ -42,6 +45,24 @@ class Player: SKSpriteNode {
             * PlayerSettings.playerSpeed
         physicsBody.velocity = CGVector(point: newVelocity)
         print("* \(animationDirection(for: physicsBody.velocity))")
+        checkDirection()
+    }
+    
+    func checkDirection() {
+        guard let physicsBody = physicsBody else { return }
+        // You calculate the direction from the player’s velocity using Animatable’s default implementation.
+        let direction = animationDirection(for: physicsBody.velocity)
+        
+        // If the direction is returned as right, you set the player’s xScale to negative so that the left animation is reversed.
+        if direction == .left {
+            xScale = abs(xScale)
+        }
+        if direction == .right {
+            xScale = -abs(xScale)
+        }
+        
+        // You run the appropriate animation for the direction
+        run(animations[direction.rawValue], withKey: "animation")
     }
 }
 
