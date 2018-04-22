@@ -41,7 +41,11 @@ class Player: SKSpriteNode {
         let newVelocity = (target - position).normalized()
             * PlayerSettings.playerSpeed
         physicsBody.velocity = CGVector(point: newVelocity)
+        print("* \(animationDirection(for: physicsBody.velocity))")
     }
 }
+
+// Player conforms to Animatable
+extension Player : Animatable {}
 
 

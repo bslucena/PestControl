@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		291BF174208CF50B0017969D /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291BF173208CF50B0017969D /* Types.swift */; };
+		291BF176208CF5770017969D /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291BF175208CF5770017969D /* Animatable.swift */; };
 		298EFBCA207A6019006AC822 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298EFBC9207A6019006AC822 /* AppDelegate.swift */; };
 		298EFBCC207A6019006AC822 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 298EFBCB207A6019006AC822 /* GameScene.sks */; };
 		298EFBD0207A6019006AC822 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298EFBCF207A6019006AC822 /* GameScene.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		291BF173208CF50B0017969D /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		291BF175208CF5770017969D /* Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
 		298EFBC6207A6019006AC822 /* PestControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PestControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		298EFBC9207A6019006AC822 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		298EFBCB207A6019006AC822 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 				298EFC01207A89CC006AC822 /* Support Code */,
 				298EFBF1207A6F4F006AC822 /* Characters */,
 				298EFBC9207A6019006AC822 /* AppDelegate.swift */,
+				291BF173208CF50B0017969D /* Types.swift */,
 				298EFBD1207A6019006AC822 /* GameViewController.swift */,
 				298EFBCF207A6019006AC822 /* GameScene.swift */,
 				298EFBCB207A6019006AC822 /* GameScene.sks */,
@@ -93,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				298EFBF2207A6F74006AC822 /* Player.swift */,
+				291BF175208CF5770017969D /* Animatable.swift */,
 			);
 			path = Characters;
 			sourceTree = "<group>";
@@ -180,8 +186,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				298EFBF3207A6F74006AC822 /* Player.swift in Sources */,
+				291BF176208CF5770017969D /* Animatable.swift in Sources */,
 				298EFC05207A8A34006AC822 /* CGVectorExtensions.swift in Sources */,
 				298EFBD0207A6019006AC822 /* GameScene.swift in Sources */,
+				291BF174208CF50B0017969D /* Types.swift in Sources */,
 				298EFBD2207A6019006AC822 /* GameViewController.swift in Sources */,
 				298EFBCA207A6019006AC822 /* AppDelegate.swift in Sources */,
 				298EFC03207A89F5006AC822 /* CGPointExtensions.swift in Sources */,
