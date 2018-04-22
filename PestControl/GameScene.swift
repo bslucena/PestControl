@@ -12,9 +12,12 @@ class GameScene: SKScene {
     
     var background: SKTileMapNode!
     var player = Player()
+    var bug = Bug()
     
     override func didMove(to view: SKView) {
         addChild(player)
+        bug.position = CGPoint(x: 60, y: 0)
+        addChild(bug)
         setupCamera()
         setupWorldPhysics()
     }
