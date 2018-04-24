@@ -12,14 +12,13 @@ class GameScene: SKScene {
     
     var background: SKTileMapNode!
     var player = Player()
-    var bug = Bug()
+    var bugsNode = SKNode()
     
     override func didMove(to view: SKView) {
         addChild(player)
-        bug.position = CGPoint(x: 60, y: 0)
-        addChild(bug)
         setupCamera()
         setupWorldPhysics()
+        createBugs()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -67,5 +66,32 @@ class GameScene: SKScene {
     func setupWorldPhysics() {
         // giving an edge loop physics body to the background tile map node, you make sure the player will never leave the map.
         background.physicsBody = SKPhysicsBody(edgeLoopFrom: background.frame)
+    }
+    
+    // This method returns a tile definition at a row–column coordinate.
+    func tile(in tileMap: SKTileMapNode, at coordinates: TileCoordinates) -> SKTileDefinition? {
+        return tileMap.tileDefinition(atColumn: coordinates.column, row: coordinates.row)
+    }
+    
+    func createBugs() {
+        guard let bugsMap = childNode(withName: "bugs") as? SKTileMapNode else { return }
+        
+        // Cycle through the rows and columns of the tile map node.
+        for row in 0..<bugsMap.numberOfRows {
+            for column in 0..<bugsMap.numberOfColumns {
+                // Get the tile definition at the row–column coordinate. If it’s not nil, then there must be a bug painted on that tile. You will use the tile variable shortly, but until then you’ll get a compiler warning.
+                guard let tile = tile(in: bugsMap, at: (column, row)) else { continue }
+                // Create a bug sprite node and get the center point of the tile to position the bug, and add the bug to the scene.
+                let bug = Bug()
+                bug.position = bugsMap.centerOfTile(atColumn: column, row: row)
+                bugsNode.addChild(bug)
+                bug.move()
+            }
+        }
+        // Add bugsNode with all its child bugs to the scene.
+        bugsNode.name = "Bugs"
+        addChild(bugsNode)
+        // Remove the tile map node from the scene as you no longer need it.
+        bugsMap.removeFromParent()
     }
 }
