@@ -66,6 +66,9 @@ class GameScene: SKScene {
     func setupWorldPhysics() {
         // giving an edge loop physics body to the background tile map node, you make sure the player will never leave the map.
         background.physicsBody = SKPhysicsBody(edgeLoopFrom: background.frame)
+        // Here, you set the physics category of the map edge. You also set the game scene as the physics contact delegate to handle contact notifications.
+        background.physicsBody?.categoryBitMask = PhysicsCategory.Edge
+        physicsWorld.contactDelegate = self
     }
     
     // This method returns a tile definition at a row–column coordinate.
@@ -95,3 +98,49 @@ class GameScene: SKScene {
         bugsMap.removeFromParent()
     }
 }
+
+extension GameScene: SKPhysicsContactDelegate {
+    func remove(bug: Bug) {
+        bug.removeFromParent()
+        // You’ll still remove the bug from its parent bugsNode, but then add it to background instead and call die(). The bug will be removed from background by the SKAction at the end of the die() sequence.
+        background.addChild(bug)
+        bug.die()
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let other = contact.bodyA.categoryBitMask == PhysicsCategory.Player ? contact.bodyB : contact.bodyA
+        
+        switch other.categoryBitMask {
+        case PhysicsCategory.Bug:
+            if let bug = other.node as? Bug {
+                remove(bug: bug)
+            }
+        default:
+            break
+        }
+        
+        // When any contact notification occurs — and remember, you are only listening for contacts involving the player — you check the direction of the player to ensure Arnie is animating in the correct direction. If he’s not moving at all, such as at the start of the game, do nothing.
+        if let physicsBody = player.physicsBody {
+            if physicsBody.velocity.length() > 0 {
+                player.checkDirection()
+            }
+        }
+    }
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

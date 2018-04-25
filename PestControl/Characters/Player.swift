@@ -35,6 +35,9 @@ class Player: SKSpriteNode {
         physicsBody?.linearDamping = 0.5
         physicsBody?.friction = 0
         physicsBody?.allowsRotation = false
+        // Your player now has the category of Player, and you’d like contact notifications for everything he hits.
+        physicsBody?.categoryBitMask = PhysicsCategory.Player
+        physicsBody?.contactTestBitMask = PhysicsCategory.All
         createAnimations(character: "player")
     }
     

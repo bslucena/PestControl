@@ -28,6 +28,7 @@ class Bug: SKSpriteNode {
         physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
         physicsBody?.restitution = 0.5
         physicsBody?.allowsRotation = false
+        physicsBody?.categoryBitMask = PhysicsCategory.Bug
         createAnimations(character: "bug")
         
     }
@@ -54,6 +55,17 @@ class Bug: SKSpriteNode {
         // Finally, run the appropriate animation action and kick off the sequence of move actions. The bug will perform the move, and then repeat move() indefinitely.
         run(animations[direction.rawValue], withKey: "animation")
         run(SKAction.sequence([moveBy, moveAgain]))
+    }
+    
+    func die() {
+        // You remove all animations and make the bug lie on its back by reversing the sprite’s yScale.
+        removeAllActions()
+        texture = SKTexture(pixelImageNamed:  "bug_lt1")
+        yScale = -1
+        // There’s no need for a dead bug to participate in the physics simulation, so remove the physics body.
+        physicsBody = nil
+        // Run an action sequence to fade out and remove the bug from the scene.
+        run(SKAction.sequence([SKAction.fadeOut(withDuration: 3), SKAction.removeFromParent()]))
     }
 }
 
